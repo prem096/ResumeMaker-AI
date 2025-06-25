@@ -1,57 +1,56 @@
-# 📄 ResumeRanker AI
+# 🤖 ResumeRanker AI
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue)
-![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey)
-![Chart.js](https://img.shields.io/badge/Chart.js-4.x-blueviolet)
-![Status](https://img.shields.io/badge/Project-Ready--to--Deploy-green)
+> An AI-powered web application to match resumes with job descriptions and rank them based on skill alignment and role inference.
 
-ResumeRanker AI is a smart resume screening tool that analyzes how well candidate resumes match a given job description using NLP techniques. It visualizes scores using a bar chart and provides results in tabular and downloadable CSV formats.
+ResumeRanker AI helps **recruiters** find the most suitable candidates from a batch of resumes, and allows **candidates** to evaluate their resumes against multiple job descriptions. It uses **Natural Language Processing (NLP)** and **Transformer-based models (BERT)** to compute similarity and extract skill relevance.
 
 ---
 
 ## 🚀 Features
 
-- 🔍 Upload a Job Description and multiple resumes (PDFs)
-- 🧠 Compute similarity using TF-IDF (or BERT upgrade ready)
-- 📊 Visualize results using Chart.js
-- 🧾 Export matching scores as downloadable CSV
-- 📱 Responsive Bootstrap UI
-- 🧼 Clean and professional UI with success/error handling
+- 🔍 **Dual Modes**:  
+  - **Recruiter Mode**: Upload a JD and multiple resumes → Get ranked candidates  
+  - **Candidate Mode**: Upload your resume and multiple JDs → Get ranked jobs
 
----
+- 🧠 **AI/NLP Matching**:  
+  Uses BERT embeddings and SpaCy to match content meaningfully, not just by keywords.
 
-## 📸 Screenshot
+- 📊 **Skill Analysis**:  
+  Extracts **matched**, **missing**, and **extra skills** using a custom skill dictionary.
 
-<table>
-<tr>
-<td><img src="https://user-images.githubusercontent.com/your-image-link/chart-demo.png" width="450"/></td>
-<td><img src="https://user-images.githubusercontent.com/your-image-link/table-demo.png" width="450"/></td>
-</tr>
-</table>
+- 📁 **PDF Summary Reports**:  
+  Generate detailed downloadable summaries with charts for each comparison.
+
+- 📈 **Interactive Dashboard**:  
+  Filter results by role, score, or skills; visualize match scores using charts.
+
+- 🧾 **User Authentication**:  
+  Login and register securely using Flask-Login and SQLite.
+
+- 💾 **Match History Tracking**:  
+  Each user's comparisons are saved for future review.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python 3.9+
-- Flask
-- scikit-learn
-- fitz (PyMuPDF)
-- Chart.js
-- Bootstrap 5
+- **Frontend**: HTML5, Bootstrap 5
+- **Backend**: Flask (Python)
+- **AI Models**: BERT (from HuggingFace Transformers), SpaCy
+- **Database**: SQLite + SQLAlchemy
+- **PDF Generation**: WeasyPrint + Matplotlib
+- **Authentication**: Flask-Login
 
 ---
 
-## 🧪 How It Works
+## 🔧 Installation
 
-1. Upload a **Job Description** (JD) PDF
-2. Upload multiple **Resume** PDFs
-3. System extracts raw text using PyMuPDF
-4. Uses TF-IDF to compare each resume to the JD
-5. Scores are shown in a table and bar chart
-6. Results can be downloaded as a CSV file
-
----
-
-## 📂 Project Structure
-
+### 1. Clone the repo
+```bash
+git clone https://github.com/your-username/resumeranker-ai.git
+cd resumeranker-ai
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+python app.py
