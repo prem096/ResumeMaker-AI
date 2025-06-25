@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mt-4">Your Past Matches</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Mode</th>
+      <th>Resume</th>
+      <th>JD</th>
+      <th>Score</th>
+      <th>Role</th>
+      <th>Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in history %}
+    <tr>
+      <td>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>{{ entry.mode }}</td>
+      <td>{{ entry.file1 }}</td>
+      <td>{{ entry.file2 }}</td>
+      <td>{{ "%.2f"|format(entry.score) }}</td>
+      <td>{{ entry.inferred_role }}</td>
+      <td><a href="/summary/{{ entry.summary_file }}" target="_blank">PDF</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

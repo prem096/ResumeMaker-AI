@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">ResumeRanker AI - Matching Results</h2>
+
+<style>
+  /* Remove hover effect for sort button */
+</style>
+
+{% if results %}
+<div class="table-responsive">
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label class="form-label fw-bold">Filter by Role:</label>
+      <select id="roleFilter" class="form-select">
+        <option value="">All Roles</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label fw-bold">Match Score ≥ (%)</label>
+      <input type="number" id="scoreFilter" class="form-control" value="0" min="0" max="100">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-bold">Search Resume or Skills</label>
+      <input type="text" id="searchInput" class="form-control" placeholder="Type to filter...">
+    </div>
+  </div>
+
+  <table class="table table-bordered table-striped align-middle table-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>{{ 'Resume' if mode == 'recruiter' else 'Job Description' }}</th>
+        <th style="min-width: 160px; white-space: nowrap;">
+          <span class="d-inline-flex align-items-center">
+            Match Score (%)
+            <button type="button" class="btn btn-outline-secondary btn-sm ms-2 sort-btn" id="sortScoreToggle" title="Sort by Score" style="vertical-align: middle; border-radius: 50%; width: 2em; height: 2em; display: inline-flex; align-items: center; justify-content: center;">
+              <span id="sortScoreIcon">&#8597;</span>
+            </button>
+          </span>
+        </th>
+        <th>Matched Skills</th>
+        <th>Missing Skills</th>
+        <th>Extra (Unused) Skills</th>
+        <th style="min-width: 180px;">Suggestions 💡</th>
+        <th style="min-width: 140px;">Inferred Role</th>
+        <th>Summary Report</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for name, score, matched, missing, extra, suggestions, role, pdf_name, jd_tag in results %}
+      <tr>
+        <td>
+          {{ name }}
+          {% if jd_tag %}
+            <div class="mt-1">
+              <span class="fw-bold me-1">JD Category:</span>
+              <span class="badge bg-info">{{ jd_tag }}</span>
+            </div>
+          {% endif %}
+        </td>
+        <td>{{ "%.2f"|format(score * 100) }}</td>
+
+        <td>
+          {% if matched %}
+            {% for skill in matched %}
+              <span class="badge bg-success me-1">{{ skill }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+
+        <td>
+          {% if missing %}
+            {% for skill in missing %}
+              <span class="badge bg-danger me-1">{{ skill }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+
+        <td>
+          {% if extra %}
+            {% for skill in extra %}
+              <span class="badge bg-warning text-dark me-1">{{ skill }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+
+        <td>
+          {% if suggestions %}
+            <ul class="mb-0 ps-3">
+              {% for tip in suggestions %}
+                <li>{{ tip }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+
+        <td>
+          <span class="fw-bold">{{ role or "—" }}</span>
+        </td>
+
+        <td>
+          <a class="btn btn-sm btn-outline-primary" href="/summary/{{ pdf_name }}" target="_blank">Download PDF</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h4 class="mt-5">Visual Match Comparison</h4>
+<canvas id="scoreChart" height="150"></canvas>
+<script>
+  window.results = {{ results|tojson|safe }};
+</script>
+<script src="{{ url_for('static', filename='results.js') }}"></script>
+
+{% else %}
+<div class="alert alert-warning text-center mt-5">
+  No matching results found. Please upload resumes and a job description.
+</div>
+{% endif %}
+
+<div class="mt-4 text-center">
+  <a href="/" class="btn btn-secondary me-2">Try Again</a>
+  <a href="/download" class="btn btn-success">Download CSV</a>
+  <a href="/download_all_pdfs" class="btn btn-primary ms-2">Download All PDFs</a>
+</div>
+
+{% endblock %}

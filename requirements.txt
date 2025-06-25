@@ -1,0 +1,11 @@
+Flask
+flask_sqlalchemy
+flask_login
+transformers
+torch
+spacy
+weasyprint
+pandas
+jinja2
+matplotlib
+PyMuPDF

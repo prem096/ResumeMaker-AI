@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">ResumeRanker AI</h2>
+
+<form method="POST" enctype="multipart/form-data">
+  <!-- Mode Selection -->
+  <div class="mb-4 text-center">
+    <label class="form-label fw-bold">Select Mode:</label><br>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input mode-selector" type="radio" name="mode" id="recruiter" value="recruiter" checked>
+      <label class="form-check-label" for="recruiter">Recruiter Mode</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input mode-selector" type="radio" name="mode" id="candidate" value="candidate">
+      <label class="form-check-label" for="candidate">Candidate Mode</label>
+    </div>
+  </div>
+
+  <!-- Recruiter Mode Section -->
+  <div id="recruiter-section" class="form-section active">
+    <div class="mb-3">
+      <label>Upload Job Description (PDF)</label>
+      <input type="file" name="jd" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Upload Resumes (PDF, Multiple)</label>
+      <input type="file" name="resumes" class="form-control" multiple required>
+    </div>
+  </div>
+
+  <!-- Candidate Mode Section -->
+  <div id="candidate-section" class="form-section">
+    <div class="mb-3">
+      <label>Upload Job Descriptions (PDF, Multiple)</label>
+      <input type="file" name="jds" class="form-control" multiple required>
+    </div>
+    <div class="mb-3">
+      <label>Upload Resume (PDF)</label>
+      <input type="file" name="resume" class="form-control" required>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary">Match Now</button>
+  </div>
+</form>
+
+<style>
+  .form-section {
+    display: none;
+  }
+  .form-section.active {
+    display: block;
+  }
+</style>
+
+<script>
+  const recruiterRadio = document.getElementById('recruiter');
+  const candidateRadio = document.getElementById('candidate');
+  const recruiterSection = document.getElementById('recruiter-section');
+  const candidateSection = document.getElementById('candidate-section');
+
+  function toggleSections() {
+    if (recruiterRadio.checked) {
+      recruiterSection.classList.add('active');
+      candidateSection.classList.remove('active');
+      document.querySelector('[name="jd"]').required = true;
+      document.querySelector('[name="resumes"]').required = true;
+      document.querySelector('[name="jds"]').required = false;
+      document.querySelector('[name="resume"]').required = false;
+    } else {
+      candidateSection.classList.add('active');
+      recruiterSection.classList.remove('active');
+      document.querySelector('[name="jds"]').required = true;
+      document.querySelector('[name="resume"]').required = true;
+      document.querySelector('[name="jd"]').required = false;
+      document.querySelector('[name="resumes"]').required = false;
+    }
+  }
+
+  recruiterRadio.addEventListener('change', toggleSections);
+  candidateRadio.addEventListener('change', toggleSections);
+  window.addEventListener('DOMContentLoaded', toggleSections);
+</script>
+
+{% endblock %}

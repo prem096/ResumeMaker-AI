@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Resume Summary</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1, h2 { color: #333; }
+    .section { margin-bottom: 20px; }
+    .skills span { display: inline-block; background: #ddd; padding: 5px 10px; margin: 2px; border-radius: 5px; }
+    .matched { background: #28a745; color: white; }
+    .missing { background: #dc3545; color: white; }
+    .extra   { background: #ffc107; }
+  </style>
+</head>
+<body>
+  <h1>Resume Summary</h1>
+  <p><strong>Resume:</strong> {{ resume_name }}</p>
+  <p><strong>Compared JD:</strong> {{ jd_name }}</p>
+  <p><strong>Inferred Role:</strong> {{ role or "—" }}</p>
+  <p><strong>Match Score:</strong> {{ score }}%</p>
+
+  <div class="section">
+    <h2>Matched Skills</h2>
+    <div class="skills">
+      {% for skill in matched %}<span class="matched">{{ skill }}</span>{% endfor %}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Missing Skills</h2>
+    <div class="skills">
+      {% for skill in missing %}<span class="missing">{{ skill }}</span>{% endfor %}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Extra (Unused) Skills</h2>
+    <div class="skills">
+      {% for skill in extra %}<span class="extra">{{ skill }}</span>{% endfor %}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Suggestions</h2>
+    <ul>
+      {% for tip in suggestions %}<li>{{ tip }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Alignment Graph</h2>
+    <img src="{{ chart_path }}" width="500px">
+  </div>
+</body>
+</html>

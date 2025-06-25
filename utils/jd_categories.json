@@ -1,0 +1,51 @@
+{
+    "Frontend": [
+      "javascript", "react", "vue", "angular", "css", "html", "sass", "less", "bootstrap", "webpack", "typescript", "redux"
+    ],
+    "Backend": [
+      "python", "django", "flask", "node", "express", "java", "spring", "c#", ".net", "ruby", "rails", "php", "laravel", "golang", "go", "rest api", "graphql"
+    ],
+    "Full Stack": [
+      "full stack", "frontend", "backend", "javascript", "node", "react", "angular", "vue", "django", "flask", "spring", "rails"
+    ],
+    "Data Science": [
+      "data science", "machine learning", "deep learning", "pandas", "numpy", "scikit-learn", "tensorflow", "keras", "pytorch", "data analysis", "statistics", "regression", "classification", "clustering", "nlp", "natural language processing"
+    ],
+    "Data Engineering": [
+      "data engineering", "etl", "airflow", "spark", "hadoop", "big data", "data pipeline", "kafka", "redshift", "snowflake", "data warehouse", "data lake"
+    ],
+    "DevOps": [
+      "devops", "docker", "kubernetes", "aws", "azure", "gcp", "ci/cd", "jenkins", "terraform", "ansible", "cloudformation", "linux", "sre", "site reliability"
+    ],
+    "Mobile": [
+      "android", "ios", "swift", "kotlin", "react native", "flutter", "mobile app", "objective-c", "xcode", "play store", "app store"
+    ],
+    "QA/Testing": [
+      "qa", "quality assurance", "testing", "test automation", "selenium", "cypress", "junit", "pytest", "manual testing", "test case", "bug tracking"
+    ],
+    "UI/UX Design": [
+      "ui", "ux", "user interface", "user experience", "figma", "sketch", "adobe xd", "wireframe", "prototype", "design system", "usability"
+    ],
+    "Product Management": [
+      "product manager", "product management", "roadmap", "stakeholder", "agile", "scrum", "kanban", "user story", "backlog", "mvp", "feature"
+    ],
+    "Project Management": [
+      "project manager", "project management", "pmp", "scrum master", "agile", "waterfall", "timeline", "milestone", "resource allocation"
+    ],
+    "Cybersecurity": [
+      "cybersecurity", "security", "infosec", "penetration testing", "vulnerability", "firewall", "encryption", "siem", "threat", "incident response"
+    ],
+    "Database": [
+      "database", "sql", "mysql", "postgresql", "oracle", "mongodb", "nosql", "database design", "query optimization", "dba"
+    ],
+    "Cloud": [
+      "cloud", "aws", "azure", "gcp", "cloud architecture", "cloud engineer", "cloud migration", "cloud security"
+    ],
+    "Business Analyst": [
+      "business analyst", "requirement gathering", "process improvement", "gap analysis", "stakeholder", "workflow", "business process"
+    ],
+    "Support": [
+      "support", "helpdesk", "technical support", "customer service", "ticketing", "troubleshooting", "service desk"
+    ],
+    "Other": []
+  }
